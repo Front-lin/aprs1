@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.PurchaseDao">
+  <resultMap id="PurchaseResultMap" type="com.aprs.entity.Purchase"> 
+  <result property="purchaseOrder_id" column="purchaseOrder_id"/> 
+  <result property="product_id" column="product_id"/> 
+  <result property="date" column="date"/>
+  <result property="employee_name" column="employee_name"/> 
+  <result property="price" column="price"/>  
+  <result property="purchase_quantity" column="purchase_quantity"/>
+  </resultMap>
+ 
+   <select id="getAll" resultMap="PurchaseResultMap" >
+   		select p.purchaseOrder_id,p.date,p.employee_name,p.product_id,s.name,s.product_spec,p.purchase_quantity,p.price
+   		from purchaseorder p left join product s on p.product_id = s.product_id
+		order by p.purchaseOrder_id 
+  </select>
+   <select id="getByNo" resultMap="PurchaseResultMap" >
+		select p.purchaseOrder_id,p.date,p.employee_name,p.product_id,s.name,s.product_spec,p.purchase_quantity,p.price 
+		from purchaseorder p left join product s on p.product_id = s.product_id
+		where p.purchaseOrder_id = #{purchaseOrder_id} 
+  </select>
+  <select id="getByArg" resultMap="PurchaseResultMap" >
+		select p.purchaseOrder_id,p.date,p.employee_name,p.product_id,s.name,s.product_spec,p.purchase_quantity,p.price 
+		from purchaseorder p left join product s on p.product_id = s.product_id
+		where 1=1 and p.date= #{date}
+  </select>
+   <select id="getNum" resultType="int" >
+		select count(1) from purchaseorder 
+  </select>
+  <select id="getNumByArgs" resultType="int" >
+		select count(1) from purchaseorder where 1=1 and date= #{date}
+  </select>
+    <delete id="delete"  >
+      delete from purchaseorder where purchaseOrder_id=#{0}
+  </delete>
+  
+</mapper>

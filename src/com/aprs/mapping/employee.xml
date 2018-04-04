@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.EmployeeDao">
+  <resultMap id="EmployeeResultMap" type="com.aprs.entity.Employee"> 
+  <result property="employee_id" column="employee_id"/> 
+  <result property="name" column="name"/>
+  <result property="password" column="password"/>  
+  </resultMap>
+  <select id="login" resultMap="EmployeeResultMap" >
+		select * from employee where employee_id=#{employee_id} and password=#{password}
+  </select>
+    <update id="change" parameterType="com.aprs.entity.Employee" >
+      update employee set password=#{password} where employee_id=#{employee_id}
+  </update>
+</mapper>

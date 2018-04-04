@@ -1,0 +1,81 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta http-equiv="Pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache"> 
+<meta http-equiv="Expires" content="0"> 
+<title>demo</title> 
+<link href="css/login.css" type="text/css" rel="stylesheet"> 
+<script src="js/jquery.min.js" language="javascript" type="text/javascript"></script>
+</head> 
+<body> 
+
+<div class="login">
+    <div class="message">登录</div>
+    <div id="darkbannerwrap"></div>
+	<input name="action" value="login" type="hidden">
+	<input name="username" id="user" placeholder="用户名"  required oninvalid="setCustomValidity('请输入用户名');" oninput="setCustomValidity('');" type="text">
+	<hr class="hr15">
+	<input name="password" id="key" placeholder="密码" required oninvalid="setCustomValidity('密码不能为空');" oninput="setCustomValidity('');" type="password">
+	<hr class="hr15">
+	<input type="radio" name="bm" value="1"  checked="checked"  /><span>管理员登录</span>&nbsp;&nbsp;<input type="radio" name="bm" value="2"/><span>销售员登录</span>
+	<hr class="hr15">
+	<input value="登录" style="width:100%;" type="button" id="login">
+	<hr class="hr20">
+	<!-- 帮助 <a onClick="alert('请联系管理员')">忘记密码</a> -->
+
+	
+</div>
+<script language="javascript">
+ $(document).ready(function () {
+            $("#login").click(function () {
+                var name = $("#user").val();
+                var pwd = $("#key").val();
+				var val = $("input[name='bm']:checked").val();
+                if (name == "") {
+                    alert("用户名不能为空！");
+                    return false;
+                }
+                if (pwd == "") {
+                    alert("密码不能为空！");
+                    return false;
+                }
+                $.ajax({
+					type: "POST",
+					url: "/aprs/employeeLogin",
+					data: { id:name,password:pwd,value:val},
+						success: function(msg) {
+							if (msg == "manager") {
+								window.location.href="main.html";
+							} 
+							else if(msg == "saler"){
+								window.location.href="salePage.html";
+							}
+							else if (msg=="false"){
+								alert("密码或用户名错误");
+							}
+						},
+					error: function(a) {
+						alert(a);
+					}
+				});
+            });
+        });
+function check(){
+ var user=document.getElementById("user").value;
+  var key=document.getElementById("key").value;
+ if(user.length>=10){
+    alert("用户名不能大于10");
+    return false;
+   }
+ if(key.length>=10){
+    alert("密码不能大于10");
+    return false;
+   }
+ return true;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.ClassifyDao">
+  <resultMap id="ClassifyResultMap" type="com.aprs.entity.Classify"> 
+  <result property="cid" column="cid"/> 
+  <result property="cname" column="cname"/>
+  <result property="pid" column="pid"/>
+  </resultMap>
+ 
+  <select id="getClassify" resultMap="ClassifyResultMap" >
+		select c.cid,c.cname,p.pname
+		from classify c inner join provider p on c.pid = p.pid
+		order by c.cname
+  </select>
+    <select id="getClassifyByNum" resultMap="ClassifyResultMap" >
+		select * from classify where pid = #{pid}
+  </select>
+  <select id="getNum" resultType="int" >
+		select count(1) from classify 
+  </select>
+   <insert id="add" parameterType="com.aprs.entity.Classify">
+  	  insert into classify(cname,pid) 
+  	  values(#{cname},#{pid})    
+  </insert>
+
+  <delete id="delete" >
+      delete from classify where cid = #{0}
+  </delete>
+</mapper>

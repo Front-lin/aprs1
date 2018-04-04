@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="style/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="./js/jquery-1.9.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.dataTables.js"></script>
+    <script src="./js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="./js/purchaseproduct.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
+
+
+</head>
+<body class="hold-transition login-page" style="padding:30px">
+<form class="form-inline">
+<label for="exampleInputName2">供应商</label>
+<select class="form-control" id="selectprovider" name="property"  onchange="getsecond()">
+
+</select>
+<label for="exampleInputName2">分类</label>
+<select class="form-control" id="selectclassify" name="classify"  onchange="getthird()">
+
+</select>
+<label for="exampleInputName2">农产品</label>
+<select class="form-control" id="selectproduct" name="product">
+
+</select>
+
+  <div class="form-group">
+    <label for="exampleInputName2">规格</label>
+    <input type="text" class="form-control" id="spec" placeholder="100">
+  </div></br>
+  <div class="form-group">
+    <label for="exampleInputEmail2">进价</label>
+    <input type="text" class="form-control" id="money" placeholder="0">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2">数量</label>
+    <input type="text" class="form-control" id="num" placeholder="0">
+  </div>
+    <div class="form-group">
+    <label for="exampleInputEmail2">生产日期</label>
+    <input type="date" class="form-control" id="date" placeholder="0">
+  </div>
+  <input type="button" value="提交" onclick="add()">
+</form>
+
+<table id="example" class="display" width="100%"></table>
+<input type="button" value="采购" onclick="purchase()">
+
+<script language="javascript">
+ $(document).ready(function () {
+           $("select[name=property]").empty();     //清空seletct的数据  
+            $.ajax({
+              dataType:"json",
+              type:"GET",                        //post请求
+              url:"/aprs/getProviderItem",                          //请求后台action 根据需求请求自己的后台数据
+              success:function(data){             //ajax成功的方法 在里卖弄给select的<option>标签赋值
+                  //向select中append、option标签
+                  var optionString = "<option grade=\'请选择一级属性\' selected = \'selected\'>--请选择一级属性--</option>";
+                  var beanList = data;            //返回的json数据
+                  console.log(beanList);
+                 console.log(beanList[1].pid);
+                  if(beanList){                   //判断
+                      for(var i=0; i<beanList.length; i++){ //遍历，动态赋值
+                          optionString +="<option grade=\""+beanList[i].pid+"\" value=\""+beanList[i].pid+"\"";  
+                          optionString += ">"+beanList[i].pname+"</option>";  //动态添加数据  
+                      }  
+                      $("select[name=property]").append(optionString);  // 为当前name为asd的select添加数据。
+                }  
+            }  
+        }); 
+        });
+</script>
+</body>
+</html>

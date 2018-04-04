@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>销售单</title>
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<script src="./js/jquery-1.9.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery.dataTables.js"></script>
+<script src="./js/dataTables.bootstrap.js"></script>
+<script src="./js/sale.js"></script>
+<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+</head>
+<body>
+  <table width="98%" style="text-align:left; margin:0 auto;">
+    <tr>
+      <td>销售时间&nbsp;&nbsp;
+        <input name="select52" type="date" class="Wdate"  id="saledate" value="2018-03-12" size="12"/>&nbsp;&nbsp; 
+        <input name="search5" id="search5" type="button" value="查询" class="btns"  />
+        </td>
+    </tr>
+  </table>
+  <table width="98%" style="text-align:left; margin:0 auto;">
+    <tr>
+      <td>销售单号&nbsp;&nbsp;
+        <input name="sid" id="sid" type="text"/>&nbsp;&nbsp; 
+        <input name="search6" id="search6" type="button" value="查询" class="btns"  />
+        </td>
+    </tr>
+  </table>
+<table class="table11" id="table11" >
+<thead>
+  <tr>
+    <th style="width:40px">销售单号</th>
+    <th  style="width:40px">销售时间</th>
+    <th style="width:40px">总额</th>
+    <th style="width:40px">操作</th>
+  </tr>
+</thead>
+<tbody>
+      
+</tbody>
+
+</table>
+<div class="modal fade" id="delcfmOverhaul">
+    <div class="modal-dialog">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">取消</span>
+                </button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Òþ²ØÐèÒªÉ¾³ýµÄid -->
+                <input type="hidden" id="deleteHaulId" />
+                    <p>你确认你要删除该采购单吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="closemodel" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary"  id="deleteHaulBtn" data-dismiss="modal">确认</button>
+            </div>
+		</div>
+    </div>
+	<!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+
+</body>

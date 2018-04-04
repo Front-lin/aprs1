@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta http-equiv="Pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache"> 
+<meta http-equiv="Expires" content="0"> 
+<title>demo</title> 
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+<link href="css/main.css" type="text/css" rel="stylesheet"> 
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.min.js" language="javascript" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+</head> 
+<body> 
+
+<div>
+	<div id="top"><span id="title">中小型超市进销存管理系统</span><div><a href="#" onclick="unlogin()" id="unlogin">退出</a></div></div>
+	<div class="panel-group" role="tablist" id="item">
+					<div class="panel">
+						 <div class="panel-heading" role="tab" id="buyOrder">
+							<h4 class="panel-title">
+								<a class="collapsed" role="button" data-toggle="collapse" href="#collapseListGroup1" aria-expanded="false" aria-controls="collapseListGroup1">
+								商品管理
+							</h4>
+						</div>
+						<div id="collapseListGroup1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="buyOrder">
+							<ul class="list-group">
+								<li class="list-group-item"><a href="#" id="provider" onclick="provide()">供应商</a></li>
+								<li class="list-group-item"><a href="#" onclick="classify()">商品类别</a></li>
+								<li class="list-group-item"><a href="#" id="product" onclick="pro()">商品</a></li>
+							</ul>
+						</div>
+					</div> 
+					<div class="panel">
+						 <div class="panel-heading" role="tab" id="buyOrder">
+							<h4 class="panel-title">
+								<a class="collapsed" role="button" data-toggle="collapse" href="#collapseListGroup2" aria-expanded="false" aria-controls="collapseListGroup2">
+								采购管理
+							</h4>
+						</div>
+						<div id="collapseListGroup2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="buyOrder">
+							<ul class="list-group">
+								<li class="list-group-item"><a href="#" id="buy" onclick="b()">采购订单</a></li>
+								<li class="list-group-item"><a href="#" onclick="buyproduct()">采购商品</a></li>
+							</ul>
+						</div>
+					</div> 
+					<div class="panel">
+						 <div class="panel-heading" role="tab" id="buyOrder">
+							<h4 class="panel-title">
+								<a class="collapsed" role="button" data-toggle="collapse" href="#collapseListGroup4" aria-expanded="false" aria-controls="collapseListGroup4">
+								销售管理
+							</h4>
+						</div>
+						<div id="collapseListGroup4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="buyOrder">
+							<ul class="list-group">
+								<li class="list-group-item"><a href="#" id="sale" onclick="sa()">销售订单</a></li>
+							</ul>
+						</div>
+					</div> 
+					<div class="panel">
+						 <div class="panel-heading" role="tab" id="buyOrder">
+							<h4 class="panel-title">
+								<a class="collapsed" role="button" data-toggle="collapse" href="#collapseListGroup5" aria-expanded="false" aria-controls="collapseListGroup5">
+								人员管理
+							</h4>
+						</div>
+						<div id="collapseListGroup5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="buyOrder">
+							<ul class="list-group">
+								<li class="list-group-item"><a href="#" onclick="saler()">收银员管理</a></li>
+								<li class="list-group-item"><a href="#" onclick="change()">修改密码</a></li>
+							</ul>
+						</div>
+					</div> 
+
+</div> 
+	<iframe id="content" src="" height="483">
+	</iframe>
+</div>
+
+<script language="javascript">
+ 
+</script>
+</body>
+</html>

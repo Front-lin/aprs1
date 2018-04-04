@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加新分类</title>
+<script src="./js/jquery-1.9.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script language="javascript" src="js/addclassify.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+<link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<table class="table11"  style="width:900px;margin-top:15px;">
+  <tr>
+    <th colspan="6" style="text-align:center;">分类</th>
+  </tr>
+  <tr>
+    <td align="right">名称</td>
+    <td colspan="5">
+		<input type="text" id="addcname" />
+	</td>
+  </tr>
+  <tr>
+    <td align="right">供应商</td>
+    <td colspan="5">
+      <select  id="selectprovider" name="property" onchange="this.parentNode.nextSibling.value=this.value">
+      </select></td>
+  </tr>
+   <tr>
+    <td colspan="6" align="center">
+        <input type="button" class="btn" id="addsend"  value="确定" />
+  </td>
+  </tr>
+</table>
+<!-- Ä£Ì¬¿ò   ÐÅÏ¢Ìí¼ÓÈ·ÈÏ -->
+<div class="modal fade" id="addsure">
+    <div class="modal-dialog">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">取消</span>
+                </button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                    <p>确定增加该分类吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="addclose" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary"  id="addHaulBtn" data-dismiss="modal">确认</button>
+            </div>
+    </div>
+    </div>
+  <!-- /.modal-content -->
+</div>
+<script language="javascript">
+ $(document).ready(function () {
+           $("select[name=property]").empty();     //清空seletct的数据  
+            $.ajax({
+              dataType:"json",
+              type:"GET",                        //post请求
+              url:"/aprs/getProviderItem",                          //请求后台action 根据需求请求自己的后台数据
+              success:function(data){             //ajax成功的方法 在里卖弄给select的<option>标签赋值
+                  //向select中append、option标签
+                  var optionString = "<option grade=\'请选择一级属性\' selected = \'selected\'>--请选择一级属性--</option>";
+                  var beanList = data;            //返回的json数据
+                  console.log(beanList);
+                  if(beanList){                   //判断
+                      for(var i=0; i<beanList.length; i++){ //遍历，动态赋值
+                          optionString +="<option grade=\""+beanList[i].pid+"\" value=\""+beanList[i].pid+"\"";  
+                          optionString += ">"+beanList[i].pname+"</option>";  //动态添加数据  
+                      }  
+                      $("select[name=property]").append(optionString);  // 为当前name为asd的select添加数据。
+                }  
+            }  
+        }); 
+        });
+</script>
+</body>
+</html>

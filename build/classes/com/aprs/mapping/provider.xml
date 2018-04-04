@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.ProviderDao">
+  <resultMap id="ProviderResultMap" type="com.aprs.entity.Provider"> 
+  <result property="pid" column="pid"/> 
+  <result property="pname" column="pname"/>
+  <result property="linkman" column="linkman"/> 
+  <result property="ptel" column="ptel"/>  
+  <result property="paddress" column="paddress"/>
+  </resultMap>
+ 
+  <select id="getProvider" resultMap="ProviderResultMap" >
+		select * from provider order by pid limit #{start},#{end}
+  </select>
+  
+   <select id="getProviderItem" resultMap="ProviderResultMap" >
+		select * from provider
+  </select>
+  
+  
+  <select id="getNum" resultType="int" >
+		select count(1) from provider 
+  </select>
+   <insert id="add" parameterType="com.aprs.entity.Provider">
+  	  insert into provider(pname,ptel,paddress) 
+  	  values(#{pname},#{ptel},#{paddress})    
+  </insert>
+
+  <delete id="delete" >
+      delete from provider where pid = #{0}
+  </delete>
+   <update id="updateProvider" parameterType="com.aprs.entity.Provider">
+      update provider set pname = #{pname},ptel=#{ptel},paddress=#{paddress} where pid= #{pid}
+  </update>
+</mapper>

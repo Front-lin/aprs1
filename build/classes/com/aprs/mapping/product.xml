@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.ProductDao">
+  <resultMap id="ProductResultMap" type="com.aprs.entity.Product"> 
+  <result property="product_id" column="product_id"/> 
+  <result property="name" column="name"/>
+  <result property="product_spec" column="product_spe"/> 
+  <result property="sale_price" column="sale_price"/>  
+  <result property="quantity" column="quantity"/>
+  </resultMap>
+ 
+  <select id="getAllProduct" resultMap="ProductResultMap" >
+		select * from product order by product_id limit #{start},#{end}
+  </select>
+  
+  
+  <select id="getNum" resultType="int" >
+		select count(1) from product 
+  </select>
+  <select id="getByNum" resultMap="ProductResultMap" >
+		select * from product where product_id=#{0}
+  </select>
+  <select id="getByNameNum" resultType="int">
+		select count(*) from product where 1=1
+		and name like CONCAT(CONCAT('%', #{0}), '%')
+  </select>
+  <select id="getByName" resultMap="ProductResultMap" >
+		select * from product where 1=1
+		and name like CONCAT(CONCAT('%', #{name}), '%')
+		limit #{start},#{end}	
+  </select>
+   <insert id="add" parameterType="com.aprs.entity.Product">
+  	  insert into product(name,product_spec,sale_price,quantity) 
+  	  values(#{name},#{product_spec},#{sale_price},#{quantity})    
+  </insert>
+
+  <delete id="delete" >
+      delete from product where product_id = #{0}
+  </delete>
+   <update id="updateSale" parameterType="com.aprs.entity.Product">
+      update product set sale_price = #{sale_price} where product_id= #{product_id}
+  </update>
+</mapper>

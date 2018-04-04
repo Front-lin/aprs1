@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.ClassifyDetailDao">
+  <resultMap id="ClassifyDetailResultMap" type="com.aprs.entity.ClassifyDetail"> 
+  <result property="did" column="did"/> 
+  <result property="dname" column="dname"/>
+  <result property="pid" column="pid"/>
+  <result property="cid" column="cid"/>
+  </resultMap>
+ 
+  <delete id="delete" >
+      delete from classify_detail where cid = #{0}
+  </delete>
+    <delete id="deleteDetail" >
+      delete from classify_detail where did = #{0}
+  </delete>
+  <select id="queryDetail" resultMap="ClassifyDetailResultMap" >
+		select did,dname
+		from classify_detail
+		where cid = #{0} limit #{1},#{2} 
+  </select>
+  <select id="getProductByNum" resultMap="ClassifyDetailResultMap" >
+		select * from classify_detail
+		where cid = #{cid}
+  </select>
+    <select id="selectNum" resultType="int">
+      select count(1) from classify_detail where 1=1 and cid = #{0}
+  </select>
+     <insert id="add" parameterType="com.aprs.entity.ClassifyDetail">
+  	  insert into classify_detail(dname,cid) 
+  	  values(#{dname},#{cid})    
+  </insert>
+</mapper>
