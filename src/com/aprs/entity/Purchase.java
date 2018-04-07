@@ -6,12 +6,15 @@ public class Purchase {
 	
 	private int purchaseOrder_id;
 	private Date date;
-	private String employee_name;
+	private String employee_id;
 	private int product_id;
 	private int purchase_quantity;
 	private double price;
 	private String name;
 	private int product_spec;
+	private int pid;
+	private String provider;
+	private String pname;
 	
 	public int getPurchaseOrder_id() {
 		return purchaseOrder_id;
@@ -25,11 +28,11 @@ public class Purchase {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getEmployee_name() {
-		return employee_name;
+	public String getEmployee_id() {
+		return employee_id;
 	}
-	public void setEmployee_name(String employee_name) {
-		this.employee_name = employee_name;
+	public void setEmployee_name(String employee_id) {
+		this.employee_id = employee_id;
 	}
 	public int getProduct_id() {
 		return product_id;
@@ -60,6 +63,27 @@ public class Purchase {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getPid() {
+		return pid;
+	}
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+	public String getProvider() {
+		return provider;
+	}
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+	public void setEmployee_id(String employee_id) {
+		this.employee_id = employee_id;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
 	
 	

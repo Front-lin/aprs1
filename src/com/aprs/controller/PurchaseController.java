@@ -12,11 +12,13 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aprs.entity.DatatablesViewPage;
 import com.aprs.entity.Purchase;
 import com.aprs.service.PurchaseService;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @Controller
 public class PurchaseController {
@@ -65,4 +67,21 @@ public class PurchaseController {
 			out.print("false");
 		}
 	}
-}
+	}/*@RequestMapping(value="/purchase", method=RequestMethod.POST)
+	public void purchase(@RequestParam(value = "cid[]") int[] cid, @RequestParam(value = "name[]") int[] name,
+			@RequestParam(value = "spec[]") int[] spec,@RequestParam(value = "date") int[] date,
+			@RequestParam(value = "money[]") int[] money,@RequestParam(value = "quantity[]") int[] quantity,
+			double sum, HttpServletResponse response) throws IOException{
+		logger.info("采购");
+		PrintWriter out = response.getWriter();
+		try {
+			purchaseService.settle(arr,count,sum);
+			out.print("true");	
+		}catch(MySQLIntegrityConstraintViolationException e) {
+			out.print("none");
+		}catch(Exception e) {
+			System.out.print(e);
+			out.print("false");
+		
+	}*/
+

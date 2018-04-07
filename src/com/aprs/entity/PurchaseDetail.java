@@ -1,13 +1,12 @@
 package com.aprs.entity;
 
-public class ClassifyDetail {
+public class PurchaseDetail {
 	private int product_id;
 	private String name;
+	private String cname;
 	private int product_spec;
-	private double sale_price;
+	private double price;
 	private int quantity;
-	private int cid;
-	private int exp;
 	public int getProduct_id() {
 		return product_id;
 	}
@@ -20,17 +19,23 @@ public class ClassifyDetail {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
 	public int getProduct_spec() {
 		return product_spec;
 	}
 	public void setProduct_spec(int product_spec) {
 		this.product_spec = product_spec;
 	}
-	public double getSale_price() {
-		return sale_price;
+	public double getPrice() {
+		return price;
 	}
-	public void setSale_price(double sale_price) {
-		this.sale_price = sale_price;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	public int getQuantity() {
 		return quantity;
@@ -38,19 +43,6 @@ public class ClassifyDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getCid() {
-		return cid;
-	}
-	public void setCid(int cid) {
-		this.cid = cid;
-	}
-	public int getExp() {
-		return exp;
-	}
-	public void setExp(int exp) {
-		this.exp = exp;
-	}
-	
 	
 	
 }

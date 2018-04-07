@@ -46,10 +46,10 @@ public class ClassifyDetailController {
         return classifyDetailService.getProductByNum(cid);
 	}
 	@RequestMapping(value="/deleteClassifyDetail", method=RequestMethod.POST)
-	public void deleteClassifyDetail(int did,HttpServletResponse response) throws IOException{
+	public void deleteClassifyDetail(int product_id,HttpServletResponse response) throws IOException{
 		PrintWriter out = response.getWriter();
 		try {
-			classifyDetailService.deleteDetail(did);
+			classifyDetailService.deleteDetail(product_id);
 				out.print("true");	
 		} catch (Exception e) {
 			logger.info("delete",e);
@@ -58,7 +58,6 @@ public class ClassifyDetailController {
 	}
 	@RequestMapping(value="addClassifyDetail", method=RequestMethod.POST)
 	public void addClassifyDetail(ClassifyDetail classifyDetail,HttpServletResponse response) throws IOException{
-		System.out.println(111);
 		PrintWriter out = response.getWriter();
 		try {
 			if(classifyDetail==null){

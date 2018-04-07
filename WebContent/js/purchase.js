@@ -58,17 +58,14 @@ $(document).ready( function () {
     		"aoColumns" :[
 				{"mDataProp":"purchaseOrder_id"},
     			{"mDataProp":"date"},
-				{"mDataProp":"employee_name"},
-    			{"mDataProp":"product_id"},
-    			{"mDataProp":"name"},
-    			{"mDataProp":"product_spec"},
-    			{"mDataProp":"purchase_quantity"},
+				{"mDataProp":"name"},
+    			{"mDataProp":"pname"},
     			{"mDataProp":"price"},
 				{
                  "sClass": "text-center",
 				 "mDataProp":"purchaseOrder_id",
-                 "render": function (mDataProp, type, full, meta) {
-                     return '<button class="btns" onclick="deletefunc(' + mDataProp + ')" >删除</button>';
+				 "render": function (mDataProp, type, full, meta) {
+                	 return '<button class="btns" onclick="purchaseDetail(' + mDataProp + ')">详情</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btns" onclick="deletefunc(' + mDataProp + ')" >删除</button>';
                  },
                  "bSortable": false
              },
@@ -140,6 +137,9 @@ $(document).ready( function () {
         keyboard : false
     });
  }
+ function purchaseDetail(purchaseOrder_id){
+		window.location.href="./purchasedetail.html?purchaseOrder_id="+purchaseOrder_id;
+}
 	 
 
 

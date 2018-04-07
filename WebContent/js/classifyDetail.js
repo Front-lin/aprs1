@@ -51,11 +51,12 @@ $(document).ready( function () {
 //             ],
     		
     		"aoColumns" :[
-				{"mDataProp":"did"},
-				{"mDataProp":"dname"},
+				{"mDataProp":"product_id"},
+				{"mDataProp":"name"},
+				{"mDataProp":"product_spec"},
 				{
 	                 "sClass": "text-center",
-					 "mDataProp":"did",
+					 "mDataProp":"product_id",
 	                 "render": function (mDataProp, type, full, meta) {
 	                	 return '<button class="btns" onclick="deletefunc(' + mDataProp + ')" >删除</button>';
 	                 },
@@ -65,12 +66,12 @@ $(document).ready( function () {
             
         });
 $("#deleteHaulBtn").click(function() {
-	var did = $("#deleteHaulId").val();
-	if(did=="") return;
+	var product_id = $("#deleteHaulId").val();
+	if(product_id=="") return;
 	$.ajax({
 		type: "POST",
 		url: "/aprs/deleteClassifyDetail",
-		data: { did: did },
+		data: { product_id: product_id },
 		success: function(msg) {
 			//$("#delcfmOverhaul").modal('hide')
 			if(msg=="true"){
@@ -95,15 +96,18 @@ $("#addsend").click(function() {
 });
 $("#addHaulBtn").click(function() {
 
-	var dname = $("#adddname").val();
-	if(dname==""){
+	var name = $("#addname").val();
+	var spec = $("#addspec").val();
+	var sale = $("#addsale").val();
+	var exp = $("#addexp").val();
+	if(name==""||spec==""||sale==""||exp==""){
 		alert("请填入完整信息");
 		return;
 	}
 	$.ajax({
 		type: "POST",
 		url: "/aprs/addClassifyDetail",
-		data: { dname:dname,cid:id },
+		data: { name:name,cid:id,product_spec:spec,sale_price:sale,exp:exp },
 		success: function(msg) {
 			if (msg=="false"){
 				alert("添加失败！");
@@ -122,11 +126,10 @@ $("#closemodel").click(function() {
 	$("#deleteHaulId").val('');
 });
 $("#closemodelsend").click(function() {
-	$("#modetno").val('');
-	$("#modepass").val('');
-	$("#modetname").val('');
-	$("#modetdept").val('');
-	$("#modetdate").val('');
+	$("#addname").val('');
+	$("#addspec").val('');
+	$("#addsale").val('');
+	$("#addexp").val('');
 });
 });
 function deletefunc(cid){
