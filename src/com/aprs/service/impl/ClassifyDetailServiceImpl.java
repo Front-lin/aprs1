@@ -15,20 +15,12 @@ public class ClassifyDetailServiceImpl implements ClassifyDetailService {
 
 	@Resource
 	private ClassifyDetailDao classifyDetailDao;
-
-	
-
-
 	@Override
 	public void delete(int cid) {
 		// TODO Auto-generated method stub
 		classifyDetailDao.delete(cid);
 		
 	}
-
-
-
-
 	@Override
 	public DatatablesViewPage<ClassifyDetail> queryDetail(int id, int start,
 			int end) {
@@ -40,34 +32,24 @@ public class ClassifyDetailServiceImpl implements ClassifyDetailService {
 		view.setiTotalRecords(5);
 		return view;
 	}
-
-
-
-
 	@Override
 	public void deleteDetail(int cid) {
 		// TODO Auto-generated method stub
 		classifyDetailDao.deleteDetail(cid);
 	}
-
-
-
-
 	@Override
 	public void add(ClassifyDetail classifyDetail) {
 		// TODO Auto-generated method stub
 		classifyDetailDao.add(classifyDetail);
 	}
-
-
-
-
 	@Override
 	public List<ClassifyDetail> getProductByNum(int cid) {
 		// TODO Auto-generated method stub
 		return classifyDetailDao.getProductByNum(cid);
 	}
-
-
-
+	@Override
+	public List<ClassifyDetail> getSpec(int cid, String name) {
+		// TODO Auto-generated method stub
+		return classifyDetailDao.getSpec(cid,name);
+	}
 }

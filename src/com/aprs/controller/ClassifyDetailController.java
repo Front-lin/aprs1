@@ -45,6 +45,14 @@ public class ClassifyDetailController {
         int cid = Integer.parseInt(request.getParameter("cid"));
         return classifyDetailService.getProductByNum(cid);
 	}
+	@RequestMapping(value="/getProductSpec", method=RequestMethod.GET)
+	@ResponseBody
+	public List<ClassifyDetail> getProductSpec(HttpServletRequest request,HttpServletResponse response){
+		response.reset();
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        String name = request.getParameter("name");
+        return classifyDetailService.getSpec(cid,name);
+	}
 	@RequestMapping(value="/deleteClassifyDetail", method=RequestMethod.POST)
 	public void deleteClassifyDetail(int product_id,HttpServletResponse response) throws IOException{
 		PrintWriter out = response.getWriter();

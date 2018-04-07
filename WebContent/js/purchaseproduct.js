@@ -1,6 +1,6 @@
-var dataSet = [[4,"name",500,"2018-03-31",45,1,45],[4,"name",500,"2018-04-03",45,1,40],["total","","","","","",85]];
+var dataSet = [["total","","","","",85]];
 var table;
-var count = 2;
+var count =0;
     window.onload = function(e){
         table = $('#example').DataTable( {
         searching: false,//屏蔽datatales的查询框
@@ -8,9 +8,8 @@ var count = 2;
         ordering: false,//关闭排序
         data: dataSet,
         columns: [
-            { title: "分类编号"},
-            { title: "商品名字" },
-            { title: "商品规格" },
+            { title: "农产品编号"},
+            { title: "农产品名字" },
             { title: "生产日期"},
             { title: "价格" },
             { title: "数量" },
@@ -20,17 +19,16 @@ var count = 2;
     }
 
 function add(){
-    var cid =  $("#selectclassify").find("option:selected").val();
+    var id =  $("#selectproduct").find("option:selected").val();
     var name = $("#selectproduct").find("option:selected").text();
-    var spec = $("#spec").val();
     var date = $("#date").val();
     var money = $("#money").val();
     var quantity = $("#num").val();
     var sum = money * quantity;
     var len = count;
-    array = [cid,name,spec,date,money,quantity,sum];
+    array = [id,name,date,money,quantity,sum];
     total = table.row(len).data();
-    total[6] += array[6];
+    total[5] += array[5];
     table.row(len).data(array).draw();
     table.row.add(total).draw();
     count++;
@@ -38,33 +36,34 @@ function add(){
 }
 
 function clean(){
-    $("#spec").val('');
+	$("#selectprovider").attr("disabled","disabled");
+	$("#selectclassify").find("option").eq(0).prop("selected",true);
+	$("#selectproduct").find("option").eq(0).prop("selected",true);
     $("#date").val('');
     $("#money").val('');
     $("#num").val('');
 }
 
 function purchase(){
-	var cid = new Array();
+	var pid = $("#selectprovider").find("option:selected").val();
+	var id = new Array();
 	var name = new Array();
-	var spec = new Array();
 	var date = new Array();
 	var money = new Array();
 	var quantity = new Array();
-	var sum = table.row(count).data()[6];
+	var sum = table.row(count).data()[5];
 	for(var i=0;i<count;i++){
 		var t =  table.row(i).data();
-		cid.push(t[0]);
+		id.push(t[0]);
 		name.push(t[1]);
-		spec.push(t[2]);
-		date.push(t[3]);
-		money.push(t[4]);
-		quantity.push(t[5]);
+		date.push(t[2]);
+		money.push(t[3]);
+		quantity.push(t[4]);
     }
 	$.ajax({
 		type: "POST",
 		url: "/aprs/purchase",
-		data: {cid: cid, name: name, spec: spec,date: date,money: money,quantity: quantity,sum: sum},
+		data: {id: id,date: date,money: money,quantity: quantity,sum: sum},
 				success: function(msg) {
 					if (msg=="false"){
 						alert("采购失败！");
@@ -117,8 +116,8 @@ function getthird(){
                   console.log(beanList);
                   if(beanList){                   //判断
                       for(var i=0; i<beanList.length; i++){ //遍历，动态赋值
-                          optionString +="<option grade=\""+beanList[i].did+"\" value=\""+beanList[i].did+"\"";  
-                          optionString += ">"+beanList[i].dname+"</option>";  //动态添加数据  
+                          optionString +="<option grade=\""+beanList[i].product_id+"\" value=\""+beanList[i].product_id+"\"";  
+                          optionString += ">"+beanList[i].name+"("+beanList[i].product_spec+"g)"+"</option>";  //动态添加数据  
                       }  
                       $("select[name=product]").append(optionString);  // 为当前name为asd的select添加数据。
                 }  

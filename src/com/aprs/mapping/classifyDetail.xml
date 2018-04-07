@@ -31,6 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectNum" resultType="int">
       select count(1) from product where 1=1 and cid = #{0}
   </select>
+   <select id="getSpec" resultMap="ClassifyDetailResultMap" >
+		select * from product
+		where cid = #{cid} and name = #{name}
+  </select>
      <insert id="add" parameterType="com.aprs.entity.ClassifyDetail">
   	  insert into product(name,product_spec,sale_price,cid,exp) 
   	  values(#{name},#{product_spec},#{sale_price},#{cid},#{exp})    

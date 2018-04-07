@@ -11,4 +11,5 @@ public interface ClassifyDetailService {
 	public void add(ClassifyDetail classifyDetail );
 	public DatatablesViewPage<ClassifyDetail> queryDetail(int id, int start, int end);
 	public List<ClassifyDetail> getProductByNum(int cid);
+	public List<ClassifyDetail> getSpec(int cid, String name);
 }
