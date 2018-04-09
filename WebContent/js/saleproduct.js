@@ -1,4 +1,4 @@
-﻿var dataSet = [[498,"name",500,45,1,45],[485,"name",500,45,1,40],["total","","","",85]];
+﻿var dataSet = [[8,"梨子",500,"2018-04-09",45,1,45],[2,"苹果",500,"2018-04-09",40,1,40],["total","","","","","",85]];
 var table;
 var count = 2;
     window.onload = function(e){
@@ -14,6 +14,7 @@ var count = 2;
             { title: "商品编号" },
             { title: "商品名字" },
             { title: "商品规格" },
+            { title: "生产日期" },
             { title: "价格" },
             { title: "数量" },
             { title: "总计" },
@@ -57,34 +58,36 @@ var count = 2;
     function change(i,len){
         array = table.row(i).data();
         total = table.row(len).data();
-        array[4] += 1;
-        array[5] += array[3];
-        total[5] += array[3];
+        array[5] += 1;
+        array[6] += array[4];
+        total[6] += array[4];
         table.row(i).data(array).draw();
         table.row(len).data(total).draw();
         
     }
     function add(product, len){
-        array = [product.id,product.name,product.qu,product.price,1,product.price];
+        array = [product.id,product.name,product.qu,product_release,product.price,1,product.price];
         total = table.row(len).data();
-        total[5] += array[3];
+        total[6] += array[4];
         table.row(len).data(array).draw();
         table.row.add(total).draw();
         count++;
     }
     function settle(){
-    	var arr = new Array();
+    	var product_id = new Array();
     	var num = new Array();
-    	var sum = table.row(count).data()[5];
+    	var releasedate = new Array();
+    	var sum = table.row(count).data()[6];
     	for(var i=0;i<count;i++){
     		var t =  table.row(i).data();
-    		arr.push(t[0]);
-    		num.push(t[4]);
+    		product_id.push(t[0]);
+    		num.push(t[5]);
+    		releasedate.push(t[3]);
         }
     	$.ajax({
 			type: "POST",
 			url: "/aprs/settle",
-			data: {arr: arr,count: num, sum: sum},
+			data: {product_id: product_id,quantity: num, releasedate: releasedate,sum: sum},
 					success: function(msg) {
 						if (msg=="false"){
 							alert("失败！");

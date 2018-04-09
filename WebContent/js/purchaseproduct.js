@@ -1,4 +1,4 @@
-var dataSet = [["total","","","","",85]];
+var dataSet = [["total","","","","",0]];
 var table;
 var count =0;
     window.onload = function(e){
@@ -48,7 +48,7 @@ function purchase(){
 	var pid = $("#selectprovider").find("option:selected").val();
 	var id = new Array();
 	var name = new Array();
-	var date = new Array();
+	var release = new Array();
 	var money = new Array();
 	var quantity = new Array();
 	var sum = table.row(count).data()[5];
@@ -56,14 +56,14 @@ function purchase(){
 		var t =  table.row(i).data();
 		id.push(t[0]);
 		name.push(t[1]);
-		date.push(t[2]);
+		release.push(t[2]);
 		money.push(t[3]);
 		quantity.push(t[4]);
     }
 	$.ajax({
 		type: "POST",
 		url: "/aprs/purchase",
-		data: {id: id,date: date,money: money,quantity: quantity,sum: sum},
+		data: {product_id: id,releasedate: release,price: money,quantity: quantity,sum: sum,pid: pid},
 				success: function(msg) {
 					if (msg=="false"){
 						alert("采购失败！");

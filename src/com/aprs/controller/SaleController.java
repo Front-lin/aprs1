@@ -75,11 +75,11 @@ public class SaleController {
 	}
 	
 	@RequestMapping(value="/settle", method=RequestMethod.POST)
-	public void settle(@RequestParam(value = "arr[]") int[] arr, @RequestParam(value = "count[]") int[] count,double sum, HttpServletResponse response) throws IOException{
+	public void settle(@RequestParam(value = "product_id[]") int[] product_id, @RequestParam(value = "quantity[]") int[] quantity,@RequestParam(value = "releasedate[]") String[] releasedate,double sum, HttpServletResponse response) throws IOException{
 		logger.info("结算");
 		PrintWriter out = response.getWriter();
 		try {
-			saleService.settle(arr,count,sum);
+			saleService.settle(product_id,quantity,releasedate,sum);
 			out.print("true");	
 		}catch(MySQLIntegrityConstraintViolationException e) {
 			out.print("none");

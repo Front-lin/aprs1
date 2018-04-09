@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Purchase {
 	
 	private int purchaseOrder_id;
-	private Date date;
+	private String date;
 	private String employee_id;
 	private int product_id;
 	private int purchase_quantity;
@@ -15,17 +15,27 @@ public class Purchase {
 	private int pid;
 	private String provider;
 	private String pname;
-	
+	private int quantity;
+	private double release;
+	public Purchase() {
+		
+	}
+	public Purchase(String date, String employee_id,double sum,int pid){
+		setDate(date);
+		setEmployee_id(employee_id);
+		setPrice(sum);
+		setPid(pid);
+	}
 	public int getPurchaseOrder_id() {
 		return purchaseOrder_id;
 	}
 	public void setPurchaseOrder_id(int purchaseOrder_id) {
 		this.purchaseOrder_id = purchaseOrder_id;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public String getEmployee_id() {
@@ -84,6 +94,18 @@ public class Purchase {
 	}
 	public void setPname(String pname) {
 		this.pname = pname;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public double getRelease() {
+		return release;
+	}
+	public void setRelease(double release) {
+		this.release = release;
 	}
 	
 	

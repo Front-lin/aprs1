@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.ReleaseDao">
+  <resultMap id="ReleaseResultMap" type="com.aprs.entity.Release"> 
+  <result property="product_id" column="product_id"/>
+  <result property="quantity" column="quantity"/>
+  <result property="price" column="price"/>
+  <result property="releasedate" column="releasedate"/>
+  </resultMap>
+
+  <insert id="purchase" >
+   insert into release_a(product_id,quantity,releasedate) values
+   <foreach collection="releases" item="re" separator=",">  
+         (#{re.product_id},#{re.quantity},#{re.releasedate})
+    </foreach> 
+  </insert>
+   
+  <update id="settle">
+    update release_a set quantity = quantity - #{quantity}
+ 	where product_id = #{product_id} and releasedate = #{releasedate}
+  </update>
+ 
+</mapper>

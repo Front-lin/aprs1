@@ -3,6 +3,7 @@ package com.aprs.controller;
 import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public class ProductController {
 
 	@RequestMapping(value="/getAllProduct", method=RequestMethod.GET)
 	@ResponseBody
-	public DatatablesViewPage<Product> getAllProduct(HttpServletRequest request,HttpServletResponse response){
+	public DatatablesViewPage<Product> getAllProduct(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
 		response.reset();
 		int start =Integer.parseInt(request.getParameter("start"));    
         int length = Integer.parseInt(request.getParameter("length"));
@@ -48,7 +49,10 @@ public class ProductController {
         	 }
         //显示指定名称的农产品
         else if (state.equals("2")) {
-	        	String name = request.getParameter("name");
+        	request.setCharacterEncoding("utf-8");
+        	String name =new String(request.getParameter("name").getBytes("iso8859-1"),"utf-8");
+	        
+	        	System.out.print(name);
 	        	num = productService.getByArgNum(name);
 	        	list = productService.getByArg(start, length, name);
         	}else {

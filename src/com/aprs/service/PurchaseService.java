@@ -11,4 +11,5 @@ public interface PurchaseService {
 	public int getNumByArgs(String date);
 	public List<Purchase> getByArg(String date);
 	public void delete(int purchaseOrder_id);
+	public void purchase(String employee_id, int[] product_id, String[] release, int[] price, int[] quantity, int pid, double sum);
 }

@@ -53,7 +53,6 @@ $(document).ready( function () {
     		"aoColumns" :[
 				{"mDataProp":"product_id"},
     			{"mDataProp":"name"},
-    			{"mDataProp":"cname"},
 				{"mDataProp":"product_spec"},
 				{"mDataProp":"price"},
 				{"mDataProp":"quantity"},

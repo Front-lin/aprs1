@@ -6,11 +6,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <resultMap id="PurchaseResultMap" type="com.aprs.entity.Purchase"> 
   <result property="purchaseOrder_id" column="purchaseOrder_id"/> 
   <result property="product_id" column="product_id"/> 
+  <result property="pid" column="pid"/> 
+  <result property="employee_id" column="employee_id"/> 
   <result property="date" column="date"/>
   <result property="name" column="name"/> 
   <result property="pname" column="pname"/>
   <result property="price" column="price"/>  
-  <result property="purchase_quantity" column="purchase_quantity"/>
+  <result property="quantity" column="quantity"/> 
   </resultMap>
  
    <select id="getAll" resultMap="PurchaseResultMap" >
@@ -39,5 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="delete"  >
       delete from purchaseorder where purchaseOrder_id=#{0}
   </delete>
-  
+   <insert id="insert" keyProperty="purchaseOrder_id" useGeneratedKeys="true" parameterType="com.aprs.entity.Purchase">
+	insert into purchaseorder(date,employee_id,price,pid) values(#{date},#{employee_id},#{price},#{pid})
+ </insert>
 </mapper>

@@ -7,6 +7,16 @@ public class PurchaseDetail {
 	private int product_spec;
 	private double price;
 	private int quantity;
+	private int purchaseOrder_id;
+	public PurchaseDetail() {
+		
+	}
+	public PurchaseDetail(int purchaseOrder_id, int product_id, int quantity,double price){
+		setPurchaseOrder_id(purchaseOrder_id);
+		setProduct_id(product_id);
+		setQuantity(quantity);
+		setPrice(price);
+	}
 	public int getProduct_id() {
 		return product_id;
 	}
@@ -42,6 +52,12 @@ public class PurchaseDetail {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public int getPurchaseOrder_id() {
+		return purchaseOrder_id;
+	}
+	public void setPurchaseOrder_id(int purchaseOrder_id) {
+		this.purchaseOrder_id = purchaseOrder_id;
 	}
 	
 	

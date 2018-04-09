@@ -10,8 +10,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aprs.dao.ReleaseDao;
 import com.aprs.dao.SaleDao;
 import com.aprs.dao.SaleDetailDao;
+import com.aprs.entity.Release;
 import com.aprs.entity.Sale;
 import com.aprs.entity.SaleDetail;
 import com.aprs.service.SaleService;
@@ -24,6 +26,9 @@ public class SaleServiceImpl implements SaleService {
 	
 	@Resource
 	private SaleDetailDao saleDetailDao;
+	
+	@Resource
+	private ReleaseDao releaseDao;
 	
 	private  SimpleDateFormat sdf =  new SimpleDateFormat( "yyyy-MM-dd" );
 	
@@ -71,16 +76,16 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	@Transactional
-	public void settle(int[] arr, int[] num,double sum) throws MySQLIntegrityConstraintViolationException {
+	public void settle(int[] product_id, int[] quantity,String[] releasedate,double sum) throws MySQLIntegrityConstraintViolationException {
 		Sale s = new Sale(sdf.format(new Date()), sum);
 		saleDao.insert(s);
 		System.out.println(s.getSale_id());
-		List<SaleDetail> list = new ArrayList<SaleDetail>();
-		for(int i=0;i<arr.length;i++){
-			list.add(new SaleDetail(s.getSale_id(), arr[i], num[i]));
+		List<SaleDetail> list1 = new ArrayList<SaleDetail>();
+		for(int i=0;i<product_id.length;i++){
+			list1.add(new SaleDetail(s.getSale_id(), product_id[i], quantity[i]));
+			releaseDao.settle(product_id[i],quantity[i],releasedate[i]);
 		}
-		saleDetailDao.settle(list);
-		
+		saleDetailDao.settle(list1);
 	}
 
 }

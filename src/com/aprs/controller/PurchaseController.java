@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aprs.entity.DatatablesViewPage;
+import com.aprs.entity.Employee;
 import com.aprs.entity.Purchase;
 import com.aprs.service.PurchaseService;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -67,21 +69,24 @@ public class PurchaseController {
 			out.print("false");
 		}
 	}
-	}/*@RequestMapping(value="/purchase", method=RequestMethod.POST)
-	public void purchase(@RequestParam(value = "cid[]") int[] cid, @RequestParam(value = "name[]") int[] name,
-			@RequestParam(value = "spec[]") int[] spec,@RequestParam(value = "date") int[] date,
-			@RequestParam(value = "money[]") int[] money,@RequestParam(value = "quantity[]") int[] quantity,
-			double sum, HttpServletResponse response) throws IOException{
-		logger.info("采购");
+	
+	@RequestMapping(value="/purchase", method=RequestMethod.POST)
+	public void purchase(@RequestParam(value = "product_id[]") int[] product_id, @RequestParam(value = "releasedate[]") String[] releasedate,
+			@RequestParam(value = "price[]") int[] price,@RequestParam(value = "quantity[]") int[] quantity,
+			int pid,double sum, HttpServletRequest request,HttpServletResponse response) throws IOException{
 		PrintWriter out = response.getWriter();
+		String employee_id = null;
+		HttpSession session = request.getSession();
+		Employee admin = (Employee)session.getAttribute("manager");
+		if(admin!=null) {
+			employee_id = admin.getEmployee_id();
+		}
 		try {
-			purchaseService.settle(arr,count,sum);
+			purchaseService.purchase(employee_id,product_id,releasedate,price,quantity,pid,sum);
 			out.print("true");	
-		}catch(MySQLIntegrityConstraintViolationException e) {
-			out.print("none");
 		}catch(Exception e) {
 			System.out.print(e);
 			out.print("false");
-		
-	}*/
-
+		}
+	}
+}

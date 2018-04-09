@@ -12,13 +12,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </resultMap>
  
   <select id="queryDetail" resultMap="PurchaseDetailResultMap" >
-		SELECT p.product_id,s.name,c.cname,s.product_spec,p.price,p.quantity
+		SELECT p.product_id,s.name,s.product_spec,p.price,p.quantity
 		FROM purchaseorder_detail p LEFT JOIN product s ON p.product_id = s.product_id
-		LEFT JOIN classify c ON p.cid = c.cid
 		WHERE purchaseOrder_id = #{0} limit #{1},#{2} 
   </select>
     <select id="selectNum" resultType="int">
       select count(1) from purchaseorder_detail where 1=1 and purchaseOrder_id = #{0}
   </select>
-
+  <insert id="purchase" >
+   insert into purchaseorder_detail(purchaseOrder_id,product_id,quantity,price) values
+   <foreach collection="purchaseDetails" item="purchaseDetail" separator=",">  
+         (#{purchaseDetail.purchaseOrder_id},#{purchaseDetail.product_id},#{purchaseDetail.quantity},#{purchaseDetail.price})
+    </foreach> 
+  </insert>
 </mapper>

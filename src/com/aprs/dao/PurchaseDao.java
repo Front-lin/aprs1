@@ -13,4 +13,5 @@ public interface PurchaseDao {
 	public List<Purchase> getByNo(int purchaesOrder_id);
 	public List<Purchase> getByArg(@Param("date")String date);
 	public void delete(int purchaesOrder_id);
+	public int insert(Purchase s);
 }
