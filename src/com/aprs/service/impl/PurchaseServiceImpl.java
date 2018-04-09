@@ -71,6 +71,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	public void purchase(String employee_id,int[] product_id, String[] releasedate, int[] price, int[] quantity, int pid, double sum) {
 		// TODO Auto-generated method stub
+			
 		Purchase s = new Purchase(sdf.format(new Date()), employee_id,sum,pid);
 		purchaseDao.insert(s);
 		System.out.println(s.getPurchaseOrder_id());

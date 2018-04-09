@@ -29,6 +29,9 @@ function change(){
 function buyproduct(){
 	$("#content").attr("src","purchaseproduct.html");
 }
+function stock(){
+	$("#content").attr("src","stock.html");
+}
 function unlogin(){
 	$.ajax({
 		type: "POST",

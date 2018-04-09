@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.StockDao">
+  <resultMap id="StockResultMap" type="com.aprs.entity.Stock"> 
+  <result property="product_id" column="product_id"/> 
+  <result property="name" column="name"/>
+  <result property="product_spec" column="product_spec"/>
+  <result property="stock" column="stock"/>
+  <result property="saleNum" column="saleNum"/>
+  </resultMap>
+ 
+  <select id="getStock" resultMap="StockResultMap" >
+		SELECT sp.product_id,sp.name,sp.product_spec,sp.quantity saleNum,IFNULL(r.quantity, 0) stock FROM 
+			(SELECT s.product_id,SUM(quantity) quantity, p.name ,p.product_spec
+			FROM saledetail s LEFT JOIN product p ON s.product_id = p.product_id
+			WHERE s.sale_id IN( 
+			SELECT sale_id FROM sale WHERE sale_date &gt;= #{before} AND sale_date &lt;= #{today})
+			GROUP BY s.product_id
+			) sp LEFT JOIN (
+			SELECT product_id,SUM(quantity) quantity FROM release_a GROUP BY product_id ) r ON sp.product_id = r.product_id
+			WHERE sp.quantity/5 &gt;= r.quantity
+			order by product_id limit #{start},#{end}
+  </select>
+  <select id="getStockNum" resultType="int" >
+		SELECT count(1) FROM 
+			(SELECT s.product_id,SUM(quantity) quantity, p.name ,p.product_spec
+			FROM saledetail s LEFT JOIN product p ON s.product_id = p.product_id
+			WHERE s.sale_id IN( 
+			SELECT sale_id FROM sale WHERE sale_date &gt;= #{before} AND sale_date &lt;= #{today})
+			GROUP BY s.product_id
+			) sp LEFT JOIN (
+			SELECT product_id,SUM(quantity) quantity FROM release_a GROUP BY product_id ) r ON sp.product_id = r.product_id
+			WHERE sp.quantity/5 &gt;= r.quantity 
+  </select>
+</mapper>
