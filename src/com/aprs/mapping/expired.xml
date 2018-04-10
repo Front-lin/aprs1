@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aprs.dao.ExpiredDao">
+  <resultMap id="ExpiredResultMap" type="com.aprs.entity.Expired"> 
+  <result property="product_id" column="product_id"/> 
+  <result property="name" column="name"/>
+  <result property="product_spec" column="product_spec"/>
+  <result property="quantity" column="quantity"/>
+  <result property="releasedate" column="releasedate"/>
+  <result property="expired" column="expired"/>
+  </resultMap>
+ 
+  <select id="getExpired" resultMap="ExpiredResultMap" >
+		SELECT r.product_id,p.name,p.product_spec,r.quantity,r.releasedate,DATEDIFF(#{today},r.releasedate)-5 expired
+			FROM product p RIGHT JOIN release_a r ON p.product_id = r.product_id
+			WHERE DATEDIFF(#{today},r.releasedate)>p.exp
+			order by product_id limit #{start},#{end}
+  </select>
+  <select id="getExpiredNum" resultType="int" >
+  		SELECT COUNT(1)
+			FROM product p RIGHT JOIN release_a r ON p.product_id = r.product_id
+			WHERE DATEDIFF(#{today},r.releasedate)>p.exp
+  </select>
+    <delete id="delete" >
+      delete from release_a where product_id = #{product_id} and releasedate = #{releasedate}
+  </delete>
+</mapper>

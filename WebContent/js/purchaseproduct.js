@@ -69,6 +69,9 @@ function purchase(){
 						alert("采购失败！");
 					} else if(msg=="true"){
 						alert("采购成功！");
+						for(var i=0;i<count-1;i++){
+							table.row(i).remove();
+						}
 					}
 				},
 				error: function(a) {

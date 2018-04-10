@@ -32,6 +32,9 @@ function buyproduct(){
 function stock(){
 	$("#content").attr("src","stock.html");
 }
+function expired(){
+	$("#content").attr("src","expired.html");
+}
 function unlogin(){
 	$.ajax({
 		type: "POST",

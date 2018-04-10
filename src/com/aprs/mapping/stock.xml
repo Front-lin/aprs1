@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </resultMap>
  
   <select id="getStock" resultMap="StockResultMap" >
-		SELECT sp.product_id,sp.name,sp.product_spec,sp.quantity saleNum,IFNULL(r.quantity, 0) stock FROM 
+		SELECT sp.product_id,sp.name,sp.product_spec,sp.quantity/5 saleNum,IFNULL(r.quantity, 0) stock FROM 
 			(SELECT s.product_id,SUM(quantity) quantity, p.name ,p.product_spec
 			FROM saledetail s LEFT JOIN product p ON s.product_id = p.product_id
 			WHERE s.sale_id IN( 
